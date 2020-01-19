@@ -1,0 +1,41 @@
+---
+title: "Confidence Intervals"
+output: html_notebook
+---
+
+
+```{r}
+nsamples <- 100000
+mean <- 4
+sd <- 2
+x <- rnorm(nsamples, mean, sd)
+hist(x)
+```
+```{r}
+sample_means <- function(n, sample_size, mu, sig){
+  means <- rep(0, num_studies)
+  sds <- rep(0, num_studies)
+  for (i in 1:num_studies) {
+    x <- rnorm(sample_size, mu, sig)
+    means[i] <- mean(x)
+    sds[i] <- sqrt(sum((x - mean(x))^2) /sample_size)
+  }
+  
+  return(data.frame(mean = means,
+                    stdev =  sds))
+
+}
+```
+```{r}
+sample_size <- 20
+num_studies <- 1000
+
+samples <- sample_means(num_studies, sample_size, mean, sd)
+
+paste0("Mean = ", round(mean(samples$mean),2))
+paste0("sds = ", round(mean(samples$stdev),2))
+
+
+#hist(samples$mean, breaks = 100)
+```
+
